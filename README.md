@@ -9,8 +9,7 @@
 ## Pre-requisites
 
 ```bash
-pip install pytest
-pip install requests
+pip install -r requirements.txt
 ```
 
 ## Command
@@ -36,6 +35,7 @@ For verbose
 ```bash
 pytest -v <test_file-name>
 ```
+---
 
 > [!Note]
 > We can create a file `pytest.ini` to add options/flag for pytest command so that we do not need to provide it at as command line argument.
