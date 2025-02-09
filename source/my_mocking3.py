@@ -6,25 +6,26 @@ import requests
 
 def len_joke():
     joke = get_joke()
-    print("The joke from get_joke() is : ", joke)
     return len(joke)
 
 
 def get_joke():
     
-    print("We're inside the get_joke() function")
-    print("Type of 'requests.exceptions.Timeout' : ", type(requests.exceptions.Timeout))
 
     url = "http://api.icndb.com/jokes/random"
 
     try:
         response = requests.get(url, timeout=30)
+        response.raise_for_status()
 
     except requests.exceptions.Timeout:
         return "No jokes"
 
     except requests.exceptions.ConnectionError:
         pass
+
+    except requests.exceptions.HTTPError:
+        return "HTTPError was raised"
 
     else:
         if response.status_code == 200:
