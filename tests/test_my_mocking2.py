@@ -27,6 +27,18 @@ class TestJoke(unittest.TestCase):
         self.assertEqual(get_joke(), "Hello World")
 
 
+    @patch("source.my_mocking2.requests")
+    def test_fail_get_joke(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 403
+        mock_response.json.return_value = {"value": {"joke": "Hello World"}}
+
+        mock_requests.get.return_value = mock_response
+
+        self.assertEqual(get_joke(), "No jokes")
+
+
 
 if __name__ == "__main__":
     unittest.main()
